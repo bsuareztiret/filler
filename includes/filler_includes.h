@@ -16,6 +16,14 @@
 # include <limits.h>
 # include "libftprintf.h"
 
+typedef struct		s_padding
+{
+	int				start;
+	int				stop;
+	int				zero;
+	char			*prefix;
+}					t_padding;
+
 int		get_next_line(const int fd, char **line);
 
 #endif

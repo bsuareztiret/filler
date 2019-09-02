@@ -18,12 +18,23 @@
 int		*scan_map(char *sstd)
 {
 	int i;
+	int *nbr;
+	char *nxt;
 	char *set;
 
 	i = 0;
-	nbr = areas_info(sstd);
-	nxt = piece_info(sstd);
-	set = set_transform(sstd);
+	while (sstd[i] != '\0')
+	  {
+	    if (set_start(sstd, i))
+	      set = set_splitcpy(sstd, i);
+			if (sstd[i] == 'P')
+					j = is_p(sstd, i);
+			if (j == 1)
+					nbr = axe_info(sstd, i);
+			if (j == 2)
+					nxt = stock_piece(sstd, i);
+	    i++;
+	  }
 	if (i = set_resolve(nbr, nxt, set))
 		return (i);
 	return (0);
@@ -32,14 +43,18 @@ int		*scan_map(char *sstd)
 int   main(int ac, char **av)
 {
 	int ret;
-	int *ans;
+	int y;
+	int x;
+	char *ans;
 	char *sstd;
 
 	ret = 0;
 	while ((ret = get_next_line(1, &sstd)) > 0)
 	{
-		ans = scan_map(sstd)
-		ft_printf("%d %d\n", ans);
+		ans = scan_map(sstd);
+		y = convert_ans(ans, 1)
+		x = convert_ans(ans, 2);
+		ft_printf("%d %d\n", y, x);
 	}
 	return (0);
 }
