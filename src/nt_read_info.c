@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:14:07 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/08/29 21:39:55 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:52:24 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,38 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int		*scan_map(char *sstd)
+t_solv		scan_map(char *sstd, t_solv answer, t_data *tmp)
 {
 	int i;
-	int *nbr;
-	char *nxt;
-	char *set;
+//	t_data	tmp;
+//	char *set;
 
 	i = 0;
-	while (sstd[i] != '\0')
-	  {
-	    if (set_start(sstd, i))
-	      set = set_splitcpy(sstd, i);
-			if (sstd[i] == 'P')
-					j = is_p(sstd, i);
-			if (j == 1)
-					nbr = axe_info(sstd, i);
-			if (j == 2)
-					nxt = stock_piece(sstd, i);
-	    i++;
-	  }
-	if (i = set_resolve(nbr, nxt, set))
-		return (i);
-	return (0);
+//	tmp = init_struct();
+	grep_info(sstd, i, tmp);
+//	set = set_splitcpy(sstd, i);
+	/*if (i = set_resolve(nbr, nxt, set))
+		return (i);*/
+	return (answer);
 }
 
-int   main(int ac, char **av)
+int   main(void)
 {
 	int ret;
-	int y;
-	int x;
-	char *ans;
 	char *sstd;
+	t_solv answer;
+	t_data tmp;
 
 	ret = 0;
+	tmp = init_struct();
+	answer.X = 0;
+	answer.Y = 0;
 	while ((ret = get_next_line(1, &sstd)) > 0)
 	{
-		ans = scan_map(sstd);
-		y = convert_ans(ans, 1)
-		x = convert_ans(ans, 2);
-		ft_printf("%d %d\n", y, x);
+			//ft_printf("%s\n", sstd);
+			answer = scan_map(sstd, answer, &tmp);
+	//	ft_printf("%d %d\n", ans);
 	}
+	ft_printf("%s", sstd);
 	return (0);
 }

@@ -4,7 +4,7 @@ int   set_start(char *sstd, int i)
 {
   if (sstd[i] == '0' && sstd[i + 1] == '0' && sstd[i + 2] == '0')
     return (1);
-  return(0)
+  return(0);
 }
 
 int   is_char_game(char c)
