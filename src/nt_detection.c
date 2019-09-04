@@ -19,7 +19,7 @@ void  stock_info(char *sstd, t_data *tmp, int i, int j)
   char *nbr;
   int   l;
 
-  nbr = ft_strnew(3);
+  nbr = ft_strnew(5);
   l = 0;
   while (sstd[i] != ':')
   {
@@ -39,7 +39,10 @@ void  stock_info(char *sstd, t_data *tmp, int i, int j)
 
 void  choose_axe(char *nbr, t_data *tmp, int j)
 {
-  if (j == 3)
+  ft_printf("----------%d---------\n", j);
+  ft_printf("------tmp:%d---------\n", tmp->plateauY);
+
+  if (j == 3 && tmp->Y == -1)
   {
     tmp->Y = atoi(nbr);
     ft_bzero(nbr, 3);
@@ -49,7 +52,7 @@ void  choose_axe(char *nbr, t_data *tmp, int j)
     tmp->X = atoi(nbr);
     ft_bzero(nbr, 3);
   }
-  if (j == 6)
+  if (j == 6 && tmp->plateauY == -1)
   {
     tmp->plateauY = atoi(nbr);
     ft_bzero(nbr, 3);

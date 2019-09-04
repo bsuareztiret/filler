@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:23:43 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/09/03 17:53:46 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:27:47 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int   		set_start(char *sstd, int i);
 int   		is_char_game(char c);
 char  		*set_splitcpy(char *sstd, int i);
 int   		is_p(char* sstd, int i);
+int   		is_number(char *sstd, int i);
 void  		stock_info(char *sstd, t_data *tmp, int i, int j);
 void  		choose_axe(char *nbr, t_data *tmp, int j);
 void  		grep_info(char *sstd, int i, t_data *tmp);
