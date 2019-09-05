@@ -6,8 +6,8 @@
 
     tmp.X = 0;
     tmp.Y = 0;
-    tmp.plateauX = -1;
-    tmp.plateauY = -1;
+    tmp.plateauX = 0;
+    tmp.plateauY = 0;
     tmp.piece = ft_strnew(60);
     return (tmp);
   }

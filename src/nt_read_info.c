@@ -6,47 +6,59 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:14:07 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/09/03 17:52:24 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:51:19 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler_includes.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
-t_solv		scan_map(char *sstd, t_solv answer, t_data *tmp)
+void		scan_map(char *sstd, t_solv *answer, t_data *tmp)
 {
 	int i;
 //	t_data	tmp;
-//	char *set;
+	char *set;
 
 	i = 0;
-//	tmp = init_struct();
+
+	if (!(set = ft_strnew(ft_strlen(sstd))))
+		return ;
+	ft_printf("****tmp.players = %c\n", tmp->player);
 	grep_info(sstd, i, tmp);
-//	set = set_splitcpy(sstd, i);
+	// set_splitcpy(sstd, set, i);
 	/*if (i = set_resolve(nbr, nxt, set))
 		return (i);*/
-	return (answer);
+	answer->X = 0;
+	answer->Y = 0;
+	// ft_printf("%03d %d", answer->Y, answer->X);
 }
 
 int   main(void)
 {
-	int ret;
 	char *sstd;
 	t_solv answer;
 	t_data tmp;
+	int 	 i;
+	int		 j;
 
-	ret = 0;
-	tmp = init_struct();
+	//tmp = init_struct();
+	i = 0;
+	j = 0;
 	answer.X = 0;
 	answer.Y = 0;
-	while ((ret = get_next_line(1, &sstd)) > 0)
-	{
+	sstd = ft_strnew(60000);
+	tmp = init_struct();
+	grep_player(sstd, &tmp);
+	ft_printf("tmp.players = %c\n", tmp.player);
+
+	// while (1)
+	// {
+			//ft_printf("eh ben?\n");
 			//ft_printf("%s\n", sstd);
-			answer = scan_map(sstd, answer, &tmp);
+			// ft_printf("ecris un truc stp\n");
+	scan_map(sstd, &answer, &tmp);
 	//	ft_printf("%d %d\n", ans);
-	}
-	ft_printf("%s", sstd);
+// }
+
+
 	return (0);
 }

@@ -14,56 +14,77 @@ int   is_p(char* sstd, int i)
   return (j);
 }
 
+int   is_me(char *sstd, int i)
+{
+  if (sstd[i] == 'b' && sstd[i + 1] == 's' && sstd[i + 2] == 'u' &&
+      sstd[i + 3] == 'a' && sstd[i + 4] == 'r' && sstd[i + 5] == 'e' &&
+      sstd[i + 6] == 'z' && sstd[i + 7] == '-')
+      return (1);
+  return (0);
+}
+
+void  grep_player(char *sstd, t_data *tmp)
+{
+  get_next_line(0, &sstd);
+  ft_printf("%s\n", sstd);
+  if (ft_strstr(sstd, "p1"))
+    tmp->player = 'O';
+  if (ft_strstr(sstd, "p2"))
+    tmp->player = 'X';
+}
+
 void  stock_info(char *sstd, t_data *tmp, int i, int j)
 {
   char *nbr;
   int   l;
+  int   k;
 
   nbr = ft_strnew(5);
   l = 0;
-  while (sstd[i] != ':')
+  k = 0;
+  while (sstd[i] != '\n')
   {
-    if (sstd[i] == ' ' && l == 0)
+    if (sstd[i] == ' ')
       i++;
     if (ft_isdigit(sstd[i]))
       nbr[l++] = sstd[i];
-    ft_printf("%s\n", nbr);
-    if (l == 2)
+    if (sstd[i + 1] == ' ' || sstd[i + 1] == ':')
     {
       choose_axe(nbr, tmp, j);
       l = 0;
     }
+    if (is_char_piece(sstd[i]))
+    {
+      tmp->piece[k++] = sstd[i];
+    }
     i++;
   }
+  ft_printf("****nbr :%d", nbr);
+
 }
 
 void  choose_axe(char *nbr, t_data *tmp, int j)
 {
-  ft_printf("----------%d---------\n", j);
-  ft_printf("------tmp:%d---------\n", tmp->plateauY);
-
-  if (j == 3 && tmp->Y == -1)
+  if (j == 4 && tmp->Y == 0)
   {
     tmp->Y = atoi(nbr);
-    ft_bzero(nbr, 3);
+    ft_bzero(nbr, 5);
   }
-  if (tmp->Y > 0 && j == 3)
+  if (tmp->Y > 0 && j == 4)
   {
     tmp->X = atoi(nbr);
-    ft_bzero(nbr, 3);
+    ft_bzero(nbr, 5);
   }
-  if (j == 6 && tmp->plateauY == -1)
+  if (j == 6 && tmp->plateauY == 0)
   {
     tmp->plateauY = atoi(nbr);
-    ft_bzero(nbr, 3);
+    ft_bzero(nbr, 5);
   }
   if (tmp->plateauY > 0 && j == 6)
   {
     tmp->plateauX = atoi(nbr);
-    ft_bzero(nbr, 3);
+    ft_bzero(nbr, 5);
   }
-  ft_printf("tmp->X = %d\ntmp->Y = %d\ntmp->plateauX = %d\ntmp->plateauY = %d\n", tmp->X, tmp->Y, tmp->plateauX, tmp->plateauY);
-
 }
 
 void  grep_info(char *sstd, int i, t_data *tmp)
@@ -71,14 +92,25 @@ void  grep_info(char *sstd, int i, t_data *tmp)
   int j;
 
   j = 0;
-  while (sstd[i] != '\0')
+  i = -1;
+  get_next_line(0, &sstd);
+  ft_printf("%s\n", sstd);
+  if (ft_strstr(sstd, "Plateau"))
+    j = 6;
+  ft_printf("j = %d\n", j);
+  // if (ft_strstr(sstd, "Piece"))
+  //   j = 4;
+  if (j == 6 && ft_strstr(sstd, "15"))
+    tmp->Y = 15;
+  if (j == 6 && ft_strstr(sstd, "17"))
+    tmp->X = 17;
+  ft_printf("tmp.X = %d\n", tmp->X);
+  ft_printf("tmp.Y = %d\n", tmp->Y);
+  while (i <= tmp->Y)
   {
-    if (sstd[i] == 'P')
-      j = is_p(sstd, i);
-    if (j == 6 || j == 3)
-      stock_info(sstd, tmp, i, j);
-    j = 0;
-    i++;
+    get_next_line(0,&sstd);
+    ft_printf("%s\n", sstd);
+      i++;
   }
-  //ft_printf("tmp.X = %d\ntmp.Y = %d\ntmp.plateauX = %d\ntmp.plateauY = %d\n", tmp.X, tmp.Y, tmp.plateauX, tmp.plateauY);
+
 }
