@@ -9,5 +9,6 @@
     tmp.plateauX = 0;
     tmp.plateauY = 0;
     tmp.piece = ft_strnew(60);
+		tmp.set = ft_strnew(100 * 99);
     return (tmp);
   }

@@ -9,7 +9,7 @@ int   set_skip(char *sstd, int i)
 
 int   is_char_game(char c)
 {
-  if (c == '.' || c == 'X' || c == 'x' || c == 'O' || c == 'o')
+  if (c == '.' || c == 'X' || c == 'x' || c == 'O' || c == 'o' || c == '*')
     return (1);
   return (0);
 }

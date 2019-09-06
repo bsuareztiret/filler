@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:14:07 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/09/05 18:51:19 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/09/06 17:19:37 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ void		scan_map(char *sstd, t_solv *answer, t_data *tmp)
 {
 	int i;
 //	t_data	tmp;
-	char *set;
+	// char *set;
 
 	i = 0;
 
-	if (!(set = ft_strnew(ft_strlen(sstd))))
-		return ;
-	ft_printf("****tmp.players = %c\n", tmp->player);
+	// if (!(set = ft_strnew(ft_strlen(sstd))))
+	// 	return ;
 	grep_info(sstd, i, tmp);
 	// set_splitcpy(sstd, set, i);
 	/*if (i = set_resolve(nbr, nxt, set))
@@ -50,15 +49,13 @@ int   main(void)
 	grep_player(sstd, &tmp);
 	ft_printf("tmp.players = %c\n", tmp.player);
 
-	// while (1)
-	// {
+	 while (1)
+	 {
 			//ft_printf("eh ben?\n");
 			//ft_printf("%s\n", sstd);
 			// ft_printf("ecris un truc stp\n");
-	scan_map(sstd, &answer, &tmp);
+			scan_map(sstd, &answer, &tmp);
 	//	ft_printf("%d %d\n", ans);
-// }
-
-
+ 	 }
 	return (0);
 }
