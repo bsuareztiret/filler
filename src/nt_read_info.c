@@ -14,16 +14,9 @@
 
 void		scan_map(char *sstd, t_solv *answer, t_data *tmp)
 {
-	int i;
-//	t_data	tmp;
-	// char *set;
-
-	i = 0;
-
 	// if (!(set = ft_strnew(ft_strlen(sstd))))
 	// 	return ;
-	grep_info(sstd, i, tmp);
-	// set_splitcpy(sstd, set, i);
+	grep_info(sstd, tmp);
 	/*if (i = set_resolve(nbr, nxt, set))
 		return (i);*/
 	answer->X = 0;
@@ -39,7 +32,6 @@ int   main(void)
 	int 	 i;
 	int		 j;
 
-	//tmp = init_struct();
 	i = 0;
 	j = 0;
 	answer.X = 0;
@@ -51,11 +43,7 @@ int   main(void)
 
 	 while (1)
 	 {
-			//ft_printf("eh ben?\n");
-			//ft_printf("%s\n", sstd);
-			// ft_printf("ecris un truc stp\n");
 			scan_map(sstd, &answer, &tmp);
-	//	ft_printf("%d %d\n", ans);
  	 }
 	return (0);
 }

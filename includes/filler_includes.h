@@ -36,17 +36,11 @@ typedef struct		s_solv
 	int				X;
 }									t_solv;
 
-int				nt_getchar(void);
 int				get_next_line(const int fd, char **line);
 void			scan_map(char *sstd, t_solv *answer, t_data *tmp);
-int   		set_start(char *sstd, int i);
-int   		is_char_game(char c);
-int				is_char_piece(char c);
-void  		set_splitcpy(char *sstd, char *set, int i);
-int   		is_p(char* sstd, int i);
 void  		stock_info(char *sstd, t_data *tmp);
 void  		choose_axe(char *nbr, t_data *tmp, int j);
-void  		grep_info(char *sstd, int i, t_data *tmp);
+void  		grep_info(char *sstd, t_data *tmp);
 void  		grep_player(char *sstd, t_data *tmp);
 t_data    init_struct(void);
 
