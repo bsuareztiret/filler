@@ -12,16 +12,28 @@
 
 from tkinter import *
 import os
+from os import listdir
+from os.path import isfile, join
 
-def create_grid_0(window, posx, posy, grid):
-    dp = 210
-    i = 0
+def create_grid_0(window, grid, Y, X):
+    dp = 100
+    p = 0
     canvas = Canvas(window, bg = 'white', width = 800, height = 800)
-    for y in range(0, 426, 26):
-        for x in range(0, 374, 26):
-            colors = select_colors(grid[i])
-            i = canvas.create_rectangle(dp + x, dp + y, dp + 26 + x, dp + 26 + y, outline = 'black', fill = colors)
+    # print(data[])
+    # grid = data[2 * i]
+    # print(grid)
+    # for y in range(0, 426, 26):
+    #     for x in range(0, 374, 26):
+    #         colors = select_colors(grid[p])
+    #         p = canvas.create_rectangle(dp + x, dp + y, dp + 26 + x, dp + 26 + y, outline = 'black', fill = colors)
+    py = 600 // Y
+    px = 595 // X
+    for y in range(0, 600, py):
+        for x in range(0, 595, px):
+            colors = select_colors(grid[p])
+            p = canvas.create_rectangle(dp + x, dp + y, dp + px + x, dp + py + y, outline = 'black', fill = colors)
     canvas.grid(row = 0, column = 0)
+    canvas.after(15)
 
 def select_colors(p):
     colors = 'white'
@@ -41,30 +53,46 @@ def select_colors(p):
         colors = 'white'
     return colors
 
-def fill_grid_O(canvas, posx, posy):
-    pstart = (23 * posx) + 210
-    pend = (26 * posy) + 210
-    print ('pstart', pstart, 'pend', pend)
-    canvas.create_rectangle(pstart, pstart, pend, pend, fill = 'black')
-
 def delete():
     Canvas.delete(ALL)
+
+def open_setgame():
+    files = [f for f in listdir("./set_game") if isfile(join("./set_game", f))]
+    data = []
+    for name in files:
+        sets = join("./set_game", name)
+        file = open(sets, "r")
+        lines = file.readlines()
+        for line in lines:
+            data.append(line.strip())
+        file.close()
+    return data
 
 window = Tk()
 window.title('Filler')
 
-x = 800
-y = 800
-posx = 1 * 26
-posy = 8 * 26
-p = 'O'
-grid = '...................................xxx...........xxxxxx.......xxxXX......................................................................................................oo......oo......ooooooooo............OOOO................................................'
-#grid = '...............\n...............\n..X............\n..xxxxx...........\n...............\n...............\n..............\n...............\n...............\n...............\n...............\n...............\n...............\n...............\n.........oooo...\n..........Ooo..\n'
+x = 1200
+y = 1200
+i = 0
+data = []
+
 area = Canvas(window, width = x, height = y, bg = 'white')
 area.pack(padx = 10, pady = 10)
 
-create_grid_0(area, posx, posy, grid)
-
+data = open_setgame ()
+X = int (data[1])
+Y = int (data[0])
+while i < (len(data)):
+    if i == 0:
+        print(data[2])
+        grid = data[2]
+        i = 2
+    if i > 1:
+        i += 3
+        if (i < len(data)):
+            grid = data[i]
+            print(data[i])
+    create_grid_0(area, grid, Y, X)
 #label_1 = Label(window, text = 'Filler', fg = 'red')
 #label_1.pack()
 #output = os.system("./../resources/filler_vm -f ../resources/maps/maps01 0&")
@@ -80,3 +108,4 @@ button_1 = Button(window, text = 'exit', command = window.destroy)
 button_1.pack(side = LEFT, padx = 5, pady = 5)
 
 window.mainloop()
+# area.after(1500)

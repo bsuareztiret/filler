@@ -60,10 +60,10 @@ void  grep_info(char *sstd, t_data *tmp)
     choose_axe(sstd, tmp, 4);
   if (ft_strstr(sstd, " ") || ft_strstr(sstd, "*") || ft_strstr(sstd, "."))
     stock_info(sstd, tmp);
-  // ft_printf("tmp.X = %d\n", tmp->X);
-  // ft_printf("tmp.Y = %d\n", tmp->Y);
-  // ft_printf("tmp.pppX = %d\n", tmp->plateauX);
-  // ft_printf("tmp.pppY = %d\n", tmp->plateauY);
-  // ft_printf("tmp.set: %s\n", tmp->set);
-  // ft_printf("tmp.piece: %s\n", tmp->piece);
+  ft_printf("tmp.X = %d\n", tmp->X);
+  ft_printf("tmp.Y = %d\n", tmp->Y);
+  ft_printf("tmp.pppX = %d\n", tmp->plateauX);
+  ft_printf("tmp.pppY = %d\n", tmp->plateauY);
+  ft_printf("tmp.set: %s\n", tmp->set);
+  ft_printf("tmp.piece: %s\n", tmp->piece);
 }

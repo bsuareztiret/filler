@@ -6,9 +6,19 @@
 
     tmp.X = 0;
     tmp.Y = 0;
+		tmp.i = 0;
     tmp.plateauX = 0;
     tmp.plateauY = 0;
     tmp.piece = ft_strnew(60);
 		tmp.set = ft_strnew(100 * 99);
     return (tmp);
   }
+
+	t_solv    init_answer(void)
+	{
+		t_solv	answer;
+
+		answer.X = 0;
+		answer.Y = 0;
+		return (answer);
+	}
