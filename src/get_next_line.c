@@ -6,106 +6,75 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:37:01 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/09/04 18:26:36 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/07 18:28:26 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler_includes.h"
 
-static char			*free_join(char *s1, char *s2, int free)
+char				*ft_stock_the_new_line(char *str)
 {
-	char			*part;
-	unsigned long	size;
+	int				i;
+	int				len;
+	char			*new;
 
-	if (s1 == NULL || s2 == NULL)
+	i = 0;
+	len = 0;
+	while (str[len++])
+		;
+	if (!(new = (char *)malloc(sizeof(*new) * len + 1)))
 		return (NULL);
-	size = (ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!(part = ft_strnew(size)))
-		return (NULL);
-	ft_strcpy(part, s1);
-	ft_strcat(part, s2);
-	if (free == 1)
-		ft_strdel(&s1);
-	if (free == 2)
-		ft_strdel(&s2);
-	if (free == 3)
+	while (i < len && str[i] != '\n')
 	{
-		ft_strdel(&s1);
-		ft_strdel(&s2);
+		new[i] = str[i];
+		i++;
 	}
-	return (part);
+	new[i] = '\0';
+	return (new);
 }
 
-static int			get_rest(const int fd, char **line, char **tmp)
+static char			*ft_clean_new(char *str)
 {
-	char			*p;
-	char			*ftmp;
-	char			*ltmp;
+	char			*new;
+	int				i;
 
-	ltmp = *line;
-	if ((p = ft_strchr(tmp[fd], '\n')) == NULL)
+	i = 0;
+	while (str[i] != '\n' && str[i])
+		i++;
+	if ((str[i] && !str[i + 1]) || !str[i])
 	{
-		if (!(*line = ft_strdup(tmp[fd])))
-			return (-1);
-		ft_strdel(&tmp[fd]);
-		ft_strdel(&ltmp);
+		ft_strdel(&str);
+		return (NULL);
 	}
-	else
-	{
-		if (!(*line = ft_strsub(tmp[fd], 0, (p - tmp[fd]))))
-			return (-1);
-		if (!(ftmp = ft_strsub(tmp[fd], (p - tmp[fd]) + 1, ft_strlen(tmp[fd]))))
-			return (-1);
-		ft_strdel(&tmp[fd]);
-		ft_strdel(&ltmp);
-		tmp[fd] = ftmp;
-		return (1);
-	}
-	return (0);
-}
-
-static int			get_read(const int fd, char **line, char **tmp, char *buff)
-{
-	int				ret;
-	char			*p;
-
-	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
-	{
-		buff[ret] = '\0';
-		if ((p = ft_strchr(buff, '\n')) == NULL)
-		{
-			if (!(*line = free_join(*line, buff, 1)))
-				return (-1);
-		}
-		else
-		{
-			if (!(*line = free_join(*line, ft_strsub(buff, 0, (p - buff)), 3)))
-				return (-1);
-			if (!(tmp[fd] = ft_strsub(buff, (p - buff) + 1, ft_strlen(buff))))
-				return (-1);
-			return (1);
-		}
-	}
-	return (0);
+	new = ft_strdup(str + i + 1);
+	ft_strdel(&str);
+	return (new);
 }
 
 int					get_next_line(const int fd, char **line)
 {
-	static char		*tmp[OPEN_MAX];
 	char			buff[BUFF_SIZE + 1];
-	int				x;
+	int				ret;
+	static char		*new;
 
-	if (!(fd >= 0 && line != NULL && (read(fd, buff, 0)) != -1
-				&& (*line = ft_strnew(0))))
+	if (!new)
+		new = ft_strnew(1);
+	if (BUFF_SIZE < 0 || !line || fd > 2560 || fd < 0)
 		return (-1);
-	if (tmp[fd])
+	ret = 2;
+	while (!(ft_strchr(new, '\n')))
 	{
-		if ((x = get_rest(fd, line, tmp)) != 0)
-			return (x);
+		ret = read(fd, buff, BUFF_SIZE);
+		if (ret == -1)
+			return (-1);
+		buff[ret] = '\0';
+		new = ft_strjoin(new, buff);
+		if (ret == 0 && *new == '\0')
+			return (0);
+		if (ret == 0)
+			break ;
 	}
-	if ((x = get_read(fd, line, tmp, buff)) != 0)
-		return (x);
-	if (line[0][0] == '\0')
-		return (0);
+	*line = ft_stock_the_new_line(new);
+	new = ft_clean_new(new);
 	return (1);
 }
