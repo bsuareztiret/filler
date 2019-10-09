@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:08:07 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 22:10:18 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/09 16:52:48 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void		change_strategy(t_sun *tzu, t_data *tmp, t_count c)
 		c = choose_path(tzu, c, tmp, 2);
 		if (fill_up(tmp, c) == 0)
 		{
-			c = init_count(-1, tmp);
-			fill_do(tmp, c);
+			c = init_count(1, tmp);
+			fill_up(tmp, c);
 		}
 	}
 	else if (tzu->d_medo < tmp->plateauy || tzu->d_inpo == 0)

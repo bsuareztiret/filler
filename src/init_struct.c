@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:13:59 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 18:29:31 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/09 16:17:28 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_data		init_info_while(t_data *tmp)
 	tmp->plateaux = tmp->plateaux;
 	tmp->x = 0;
 	tmp->y = 0;
+	tmp->piece = NULL;
+	tmp->set = NULL;
 	tmp->posme = tmp->posme;
 	tmp->ifplay = 0;
 	return (*tmp);
@@ -73,10 +75,9 @@ t_count		init_count(int sign, t_data *tmp)
 
 void		freetab(char **tab, int size, int i)
 {
-	int		tmp;
-
-	tmp = size;
-	while (i <= tmp)
+	if (!tab)
+		return ;
+	while (i < size)
 	{
 		ft_strdel(&tab[i]);
 		i++;

@@ -6,15 +6,16 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 21:50:03 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 23:04:42 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/09 16:30:21 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_INCLUDES_H
 # define FILLER_INCLUDES_H
+# define BUFF_SIZE 300
 # include <limits.h>
 # include <stdlib.h>
-# include "libftprintf.h"
+# include "../libftprintf/includes/libftprintf.h"
 
 typedef struct		s_data
 {

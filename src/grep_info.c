@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 23:43:57 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 23:04:13 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/09 16:53:05 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			stock_board(char *sstd, t_data *tmp, int x)
 {
 	if (tmp->x && tmp->y)
 	{
+		if (x == -1)
+			x = 0;
 		if (ft_strstr(sstd, ".") || ft_strstr(sstd, "*"))
 			if (!(tmp->piece[x] = ft_strdup(sstd)))
 				return (-1);

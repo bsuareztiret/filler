@@ -6,13 +6,13 @@
 #    By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/11 10:20:35 by bsuarez-          #+#    #+#              #
-#    Updated: 2019/10/08 13:17:51 by bsuarez-         ###   ########.fr        #
+#    Updated: 2019/10/09 12:54:49 by bsuarez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bsuarez-.filler
 CC = gcc
-CFLAGS += -Ofast -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror
 SANITIZE = -fsanitize=address
 LIBFTP =./libftprintf
 HEADER = ./includes
@@ -30,8 +30,6 @@ SRCS = $(addprefix $(DIR_S)/, $(SOURCES))
 OBJS = $(SOURCES:.c=.o)
 OBJS_DIR = $(addprefix $(DIR_O)/, $(OBJS))
 MV = $(shell mv bsuarez-.filler ./resources/players)
-RN = $(shell rm a.out)
-DP = $(shell rm ./resources/players/bsuarez-.filler)
 
 HD = $(addprefix ./includes/, filler_includes.h libft.h libftprintf.h)
 
@@ -68,22 +66,6 @@ san:
 	@printf '[\033[0;32m********************\033[0m] (100%%)\r'
 	@$(MV)
 	@echo "bsuarez-.filler with fsanatize \033[0;32mcreated ~ [\/].\033[0m"~
-
-val:
-		@printf '[\033[0;32m....................\033[0m] (0%%)\r'
-		@printf '[\033[0;32m********............\033[0m] (40%%)\r'
-		@make -C $(LIBFTP)
-		@cp libftprintf/libftprintf.a ./
-		@mkdir -p obj
-		@printf '[\033[0;32m**********..........\033[0m] (50%%)\r'
-		@$(CC) $(CFLAGS) -I $(HEADER) -c $(SRCS)
-		@printf '[\033[0;32m****************....\033[0m] (70%%)\r'
-		@mv $(OBJS) $(DIR_O)
-		@$(CC) $(CFLAGS) $(SANITIZE) $(OBJS_DIR) libftprintf.a -o $(NAME)
-		@printf '[\033[0;32m********************\033[0m] (100%%)\r'
-		@$(MV)
-		@echo "bsuarez-.filler with valgrind \033[0;32mcreated ~ [\/].\033[0m"~
-
 
 clean:
 	@printf '[\033[0;32m********************\033[0m] (100%%)\r'
