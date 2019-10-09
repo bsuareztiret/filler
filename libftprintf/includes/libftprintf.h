@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:47:49 by mcabrol           #+#    #+#             */
-/*   Updated: 2019/09/16 16:00:33 by mcabrol          ###   ########.fr       */
+/*   Updated: 2019/10/08 21:22:49 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libft/libft.h"
 # include "colors.h"
 
-# define BUFFSIZE		300
+# define BUFFSIZE		1000
 
 enum				e_cast
 {

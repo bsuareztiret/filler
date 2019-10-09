@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 21:50:03 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 20:30:46 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/08 23:04:42 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ void				board_resolve(t_data *tmp, t_sun *tzu);
 void				change_strategy(t_sun *tzu, t_data *tmp, t_count c);
 t_count				choose_path(t_sun *tzu, t_count c, t_data *tmp, int path);
 void				convert_result(int py, int px, t_data *tmp);
-void				stock_board(char *sstd, t_data *tmp, int x);
-void				stock_axe(char *nbr, t_data *tmp, int j);
-void				grep_info(char *sstd, t_data *tmp, int x, int i);
+int					grep_info(char *sstd, t_data *tmp, int x, int i);
 char				grep_player(char *sstd, t_data *tmp);
-void				stock_board(char *sstd, t_data *tmp, int x);
-void				stock_axe(char *sstd, t_data *tmp, int j);
+int					stock_board(char *sstd, t_data *tmp, int x);
+int					stock_axe(char *sstd, t_data *tmp, int j);
 void				scan_map_do(t_data *tmp, t_sun *tzu);
 void				scan_map_up(t_data *tmp, t_sun *tzu);
 t_data				init_info(t_data *tmp);

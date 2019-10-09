@@ -6,75 +6,69 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:37:01 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/07 18:28:26 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/08 21:32:19 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler_includes.h"
 
-char				*ft_stock_the_new_line(char *str)
+static int	ft_read(const int fd, char **str)
 {
-	int				i;
-	int				len;
-	char			*new;
+	int		i;
+	char	*buffer;
+	char	*rest;
 
-	i = 0;
-	len = 0;
-	while (str[len++])
-		;
-	if (!(new = (char *)malloc(sizeof(*new) * len + 1)))
-		return (NULL);
-	while (i < len && str[i] != '\n')
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-static char			*ft_clean_new(char *str)
-{
-	char			*new;
-	int				i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i])
-		i++;
-	if ((str[i] && !str[i + 1]) || !str[i])
-	{
-		ft_strdel(&str);
-		return (NULL);
-	}
-	new = ft_strdup(str + i + 1);
-	ft_strdel(&str);
-	return (new);
-}
-
-int					get_next_line(const int fd, char **line)
-{
-	char			buff[BUFF_SIZE + 1];
-	int				ret;
-	static char		*new;
-
-	if (!new)
-		new = ft_strnew(1);
-	if (BUFF_SIZE < 0 || !line || fd > 2560 || fd < 0)
+	if (!(buffer = ft_strnew(sizeof(char) * BUFF_SIZE + 1)))
 		return (-1);
-	ret = 2;
-	while (!(ft_strchr(new, '\n')))
+	i = read(fd, buffer, BUFF_SIZE);
+	if (i > 0)
 	{
-		ret = read(fd, buff, BUFF_SIZE);
-		if (ret == -1)
+		buffer[i] = '\0';
+		if (!(rest = ft_strjoin(*str, buffer)))
 			return (-1);
-		buff[ret] = '\0';
-		new = ft_strjoin(new, buff);
-		if (ret == 0 && *new == '\0')
-			return (0);
-		if (ret == 0)
-			break ;
+		free(*str);
+		*str = rest;
 	}
-	*line = ft_stock_the_new_line(new);
-	new = ft_clean_new(new);
+	free(buffer);
+	return (i);
+}
+
+static int	get_line(char **line, char **end, char **str)
+{
+	if (!(*line = ft_strsub(*str, 0, ft_strlen(*str) - ft_strlen(*end))))
+		return (-1);
+	if (!(*end = ft_strdup(*end + 1)))
+		return (-1);
+	free(*str);
+	*str = *end;
 	return (1);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	int			i;
+	static char	*str[OPEN_MAX];
+	char		*end;
+
+	if (fd < 0 || fd > OPEN_MAX || !line || \
+			(!str[fd] && !(str[fd] = ft_strnew(0))))
+		return (-1);
+	while ((end = ft_strchr(str[fd], '\n')) == NULL)
+	{
+		i = ft_read(fd, &str[fd]);
+		if (i == 0)
+		{
+			if (ft_strlen(str[fd]) == 0)
+			{
+				free(str[fd]);
+				return (0);
+			}
+			str[fd] = ft_strjoin(str[fd], "\n");
+		}
+		if (i < 0)
+			return (-1);
+		else
+			end = ft_strchr(str[fd], '\n');
+	}
+	return (get_line(line, &end, &str[fd]));
 }

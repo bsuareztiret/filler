@@ -6,7 +6,7 @@
 /*   By: bsuarez- <bsuarez-@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:53:36 by bsuarez-          #+#    #+#             */
-/*   Updated: 2019/10/08 20:28:45 by bsuarez-         ###   ########.fr       */
+/*   Updated: 2019/10/08 22:25:13 by bsuarez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ int			main(void)
 	t_data	tmp;
 
 	sstd = NULL;
-	tmp.pme = grep_player(sstd, &tmp);
+	if ((tmp.pme = grep_player(sstd, &tmp)) == 0)
+		return (-1);
 	tmp = init_info(&tmp);
 	while (1)
 	{
 		tmp = init_info_while(&tmp);
 		tzu = init_war();
-		grep_info(sstd, &tmp, -1, -2);
+		if (grep_info(sstd, &tmp, -1, -3) == -1)
+		{
+			ft_printf("error malloc alocation\n");
+			return (-1);
+		}
 		board_resolve(&tmp, &tzu);
 		if (tmp.ifplay == 0)
 			ft_printf("%d %d\n", 0, 0);
